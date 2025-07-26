@@ -1,0 +1,4 @@
+lib/*
+.exe
+test/*.exe
+cpp_single_number/*.exe

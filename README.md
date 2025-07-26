@@ -13,6 +13,8 @@ multi-lang-project/
 ├─ go_palindrome/          # Go source code
 │   └─ palindrome.go
 ├─ libs/                   # Compiled shared libraries
+│   ├─ is_palindrome/
+│   └─ single_number/  
 ├─ cs_app/                 # C# application
 │   ├─ Program.cs
 │   └─ cs_app.csproj
@@ -35,12 +37,7 @@ conda activate multi_lang_env
 You can then run the Python script in step 5.
 ```
 
-### Compile the C++ library navigate to the C++ source folder:
-
-```bash
-cd cpp_single_number
-```
-### Compile with g++:
+### Compile the C++ library with g++:
 
 Linux/macOS
 ```bash
@@ -48,7 +45,8 @@ g++ -shared -fPIC single_number.cpp -o ../libs/libsingle_number.so
 ```
 Windows (MinGW)
 ```bash
-g++ -shared -o ../libs/single_number.dll single_number.cpp
+g++ -c -DBUILDING_DLL cpp_single_number/single_number.cpp -o lib/single_number.o
+g++ -shared -o lib/single_number.dll lib/single_number.o "-Wl,--out-implib,lib/libsingle_number.a"
 ```
 ### Compile the Go library
 Navigate to the Go source folder:
@@ -118,6 +116,10 @@ This setup uses manual compilation commands without build systems like CMake for
 
 **Educational goals**  
 Export C-compatible functions from C++ and Go.
+
+## Tests
+
+
 
 ### Consume native libraries from:
 
